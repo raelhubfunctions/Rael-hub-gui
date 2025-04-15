@@ -92,8 +92,8 @@ G2L["9"]["CornerRadius"] = UDim.new(0, 10);
 G2L["a"] = Instance.new("TextLabel", G2L["5"]);
 G2L["a"]["TextWrapped"] = true;
 G2L["a"]["BorderSizePixel"] = 0;
-G2L["a"]["TextSize"] = 14;
-G2L["a"]["TextScaled"] = true;
+G2L["a"]["TextSize"] = 20;
+G2L["a"]["TextScaled"] = false;
 G2L["a"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["a"]["FontFace"] = Font.new([[rbxasset://fonts/families/Roboto.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
 G2L["a"]["TextColor3"] = Color3.fromRGB(17, 236, 139);
@@ -232,7 +232,7 @@ local script = G2L["d"];
 	
 	task.wait(0.5)
 	
-end;
+end
 runScriptLoad()
 
 return G2L["1"], G2L["a"], G2L["8"]

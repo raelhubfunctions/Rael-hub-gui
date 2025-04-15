@@ -1,6 +1,8 @@
 --// Importar a função \\--
 local ScreenGui, textInfo, containerBar, contentBar = loadstring(game:HttpGet("https://raw.githubusercontent.com/raelhubfunctions/rael-hub-gui/refs/heads/main/Source.lua"))()
 
+local nameExecutor, versionExecutor = identifyexecutor()
+
 getgenv().RaelHubGuiLoad = ScreenGui
 
 local function setValueBar(valueText, valueSize)
@@ -12,4 +14,4 @@ end
 
 task.wait(1)
 
-setValueBar("Xeno?")
+setValueBar(nameExecutor, 0.5)
