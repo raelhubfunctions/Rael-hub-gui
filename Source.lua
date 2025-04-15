@@ -142,8 +142,7 @@ G2L["d"] = Instance.new("LocalScript", G2L["2"]);
 G2L["d"]["Name"] = [[system]];
 
 
--- StarterGui.rael hub load.bg image.system
-local function C_d()
+local function runScriptLoad()
 local script = G2L["d"];
 	local TS = game:GetService("TweenService")
 	local background = script.Parent
@@ -226,8 +225,9 @@ local script = G2L["d"];
 		BackgroundTransparency = 0
 	}):Play()
 	
+	task.wait(0.5)
 	
 end;
-task.spawn(C_d);
+runScriptLoad()
 
 return G2L["1"], G2L["a"], G2L["5"], G2L["6"]
