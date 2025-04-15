@@ -1,9 +1,14 @@
 local G2L = {};
-local PlayerGui = gethui() or game:GetService("CoreGui")
+
+local PlayerGui = game:GetService("CoreGui")
+
+if PlayerGui:FindFirstChild("rael hub load") then
+  PlayerGui:FindFirstChild("rael hub load"):Destroy()
+end
+
 G2L["1"] = Instance.new("ScreenGui", PlayerGui);
 G2L["1"]["Name"] = [[rael hub load]];
 G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
-
 
 -- StarterGui.rael hub load.bg image
 G2L["2"] = Instance.new("ImageLabel", G2L["1"]);
