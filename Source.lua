@@ -255,7 +255,13 @@ function GuiModule.RunInterface(stopbadexecutor)
       
       if not valueSize then return end
       
-      containerBar.Size = UDim2.new(valueSize, 0, containerBar.Size.Y.Scale, 0)
+      local barAnim = TS:Create(conatinerBarContent, FadeOut, {
+  		  Size = UDim2.new(valueSize, 0, 0, 10)
+  	  })
+      
+      barAnim:Play()
+      barAnim.Completed:Wait()
+      
     end
     
     task.wait(1)
@@ -270,11 +276,10 @@ function GuiModule.RunInterface(stopbadexecutor)
       end
       
       GuiModule.setValueBar({Text = nameExecutor}, 0.5)
-      
     else
       GuiModule.setValueBar({Text = nameExecutor}, 0.5)
     end
-    
+    task.wait(0.5)
     getgenv().RaelHubGuiLoad = G2L["1"]
   	
   	return true

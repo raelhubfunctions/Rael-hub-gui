@@ -1,7 +1,8 @@
 local BadExecutors = {
   "xeno",
   "solara",
-  "jjsploit"
+  "jjsploit",
+  "krnl"
 }
 
 return BadExecutors
