@@ -6,9 +6,38 @@ local RaelHubTradutor = loadstring(game:HttpGet("https://raw.githubusercontent.c
 local NotificationManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/raelhubfunctions/Rael-Hub-functions/refs/heads/main/Rael%20notification%20system/script.lua"))()
 local notification = NotificationManager.new()
 
+local messageThanks = RaelHubTradutor.Tradutor("Thank you for using rael hub")
 local messageWarning = RaelHubTradutor.Tradutor("This script does not have executor support")
 
-function GuiModule.RunInterface(stopbadexecutor, soundId, BadExecutors)
+function GuiModule.RunInterface(tableInfo)
+  
+  local soundID
+  local BackListExecutors
+  local TextThanks
+  
+  if tableInfo then
+    if type(tableInfo) ~= "table" then
+      return warn("[Erro] Coloque uma tabela")
+    end
+    
+    TextThanks = tableInfo.TextThanks or messageThanks
+    soundID = tableInfo.SoundID or "rbxassetid://6114974207"
+    BackListExecutors = tableInfo.Executors or {}
+    
+  else
+    
+    soundID = "rbxassetid://6114974207"
+    BackListExecutors = {}
+    TextThanks = messageThanks
+  end
+  
+  local function playSound(soundID, object)
+    local startSound = Instance.new("Sound")
+    startSound.SoundId = soundID
+    startSound.Volume = 1
+    startSound.Parent = object
+    startSound:Play()
+  end
   
   local G2L = {};
   
@@ -87,7 +116,7 @@ function GuiModule.RunInterface(stopbadexecutor, soundId, BadExecutors)
   G2L["8"] = Instance.new("Frame", G2L["6"]);
   G2L["8"]["BorderSizePixel"] = 0;
   G2L["8"]["BackgroundColor3"] = Color3.fromRGB(17, 236, 139);
-  G2L["8"]["Size"] = UDim2.new(0.2, 0, 1, 0);
+  G2L["8"]["Size"] = UDim2.new(0, 0, 1, 0);
   G2L["8"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
   G2L["8"]["Name"] = [[bar]];
   
@@ -147,7 +176,7 @@ function GuiModule.RunInterface(stopbadexecutor, soundId, BadExecutors)
   G2L["c"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
   G2L["c"]["Size"] = UDim2.new(0.8, 0, 0, 43);
   G2L["c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-  G2L["c"]["Text"] = [[Thank you for using rael hub]];
+  G2L["c"]["Text"] = TextThanks
   G2L["c"]["Name"] = [[thank you text]];
   G2L["c"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
   
@@ -155,7 +184,6 @@ function GuiModule.RunInterface(stopbadexecutor, soundId, BadExecutors)
   -- StarterGui.rael hub load.bg image.system
   G2L["d"] = Instance.new("LocalScript", G2L["2"]);
   G2L["d"]["Name"] = [[system]];
-  
   
   local function runScriptLoad()
   local script = G2L["d"];
@@ -173,6 +201,8 @@ function GuiModule.RunInterface(stopbadexecutor, soundId, BadExecutors)
   	background.ImageTransparency = 1
   	background.Size = UDim2.new(0, 300, 0, 150)
   	textThankYou.TextTransparency = 1
+  	
+  	playSound(soundID, background)
   	
   	local FadeIn = TweenInfo.new(
   		0.5,
@@ -239,6 +269,9 @@ function GuiModule.RunInterface(stopbadexecutor, soundId, BadExecutors)
   	TS:Create(conatinerBarContent, FadeIn, {
   		BackgroundTransparency = 0
   	}):Play()
+  	TS:Create(conatinerBarContent, FadeOut, {
+  		Size = UDim2.new(0.2, 0, 1, 0)
+  	}):Play()
   	
   	task.wait(0.5)
     
@@ -279,32 +312,29 @@ function GuiModule.RunInterface(stopbadexecutor, soundId, BadExecutors)
       
     end
     
+    function GuiModule.Destroy()
+      G2L["1"]:Destroy()
+    end
+    
     task.wait(1)
     
-    if table.find(BadExecutors, string.lower(nameExecutor)) then
-      
-      if stopbadexecutor then
-        GuiModule.setValueBar({Text = nameExecutor, Color = Color3.fromRGB(248, 0, 0)}, 0.5)
-        task.spawn(function() shake(background, 0.5, 5) end)
-        notification:createNotification(messageWarning, 5)
-        warn("[Rael Hub]" .. messageWarning)
-        task.wait(5)
-        G2L["1"]:Destroy()
-        return false
-      end
-      
-      GuiModule.setValueBar({Text = nameExecutor}, 0.5)
-    else
-      GuiModule.setValueBar({Text = nameExecutor}, 0.5)
+    if table.find(BackListExecutors, string.lower(nameExecutor)) then
+      GuiModule.setValueBar({Text = nameExecutor .. " Executor", Color = Color3.fromRGB(248, 0, 0)}, 0.5)
+      task.spawn(function() shake(background, 0.5, 5) end)
+      notification:createNotification(messageWarning, 5)
+      warn("[Rael Hub]" .. messageWarning)
+      task.wait(5)
+      G2L["1"]:Destroy()
+      return false
     end
+    
+    GuiModule.setValueBar({Text = nameExecutor .. " Executor"}, 0.5)
     task.wait(0.5)
     getgenv().RaelHubGuiLoad = G2L["1"]
-  	
   	return true
   end
-  if not runScriptLoad() then
-    return "nosupport"
-  end
+  
+  return runScriptLoad()
 end
 
 return GuiModule

@@ -1,13 +1,8 @@
 local GuiModule = loadstring(game:HttpGet("https://raw.githubusercontent.com/raelhubfunctions/rael-hub-gui/refs/heads/main/Module.lua"))()
 
-local Support = GuiModule.RunInterface(true, "sound", {
-  "xeno",
-  "krnl"
-})
+local ExecutorSupport = GuiModule.RunInterface()
 
-if Support ~= "nosupport" then
-  GuiModule.setValueBar({
-    Text = "Tralalelo Tralala"
-  }
-  , 0.7)
+if ExecutorSupport then
+  GuiModule.setValueBar({Text = "Finishing"}
+  , 1)
 end
