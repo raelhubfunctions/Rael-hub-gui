@@ -1,17 +1,6 @@
---[=[
- d888b  db    db d888888b      .d888b.      db      db    db  .d8b.  
-88' Y8b 88    88   `88'        VP  `8D      88      88    88 d8' `8b 
-88      88    88    88            odD'      88      88    88 88ooo88 
-88  ooo 88    88    88          .88'        88      88    88 88~~~88 
-88. ~8~ 88b  d88   .88.        j88.         88booo. 88b  d88 88   88    @uniquadev
- Y888P  ~Y8888P' Y888888P      888888D      Y88888P ~Y8888P' YP   YP  CONVERTER 
-]=]
-
--- Instances: 13 | Scripts: 1 | Modules: 0 | Tags: 0
 local G2L = {};
-
--- StarterGui.rael hub load
-G2L["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+local PlayerGui = gethui() or game:GetService("CoreGui")
+G2L["1"] = Instance.new("ScreenGui", PlayerGui);
 G2L["1"]["Name"] = [[rael hub load]];
 G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
 
@@ -25,7 +14,7 @@ G2L["2"]["Image"] = [[rbxassetid://18665679839]];
 G2L["2"]["Size"] = UDim2.new(0, 526, 0, 208);
 G2L["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["2"]["BackgroundTransparency"] = 1;
-G2L["2"]["Name"] = [[bg image]];
+G2L["2"]["Name"] = [[background image]];
 G2L["2"]["Position"] = UDim2.new(0.49935, 0, 0.5, 0);
 
 
@@ -241,4 +230,4 @@ local script = G2L["d"];
 end;
 task.spawn(C_d);
 
-return G2L["1"], require;
+return G2L["1"], G2L["a"], G2L["5"], G2L["6"]
