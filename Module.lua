@@ -2,14 +2,13 @@ local GuiModule = {}
 local PlayerGui = game:GetService("CoreGui")
 local nameExecutor, versionExecutor = identifyexecutor()
 
-local BadExecutors = loadstring(game:HttpGet("https://raw.githubusercontent.com/raelhubfunctions/rael-hub-gui/refs/heads/main/BadExecutor.lua"))()
 local RaelHubTradutor = loadstring(game:HttpGet("https://raw.githubusercontent.com/raelhubfunctions/Rael-Hub-functions/refs/heads/main/Rael%20Translation%20API/script.lua"))()
 local NotificationManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/raelhubfunctions/Rael-Hub-functions/refs/heads/main/Rael%20notification%20system/script.lua"))()
 local notification = NotificationManager.new()
 
 local messageWarning = RaelHubTradutor.Tradutor("This script does not have executor support")
 
-function GuiModule.RunInterface(stopbadexecutor)
+function GuiModule.RunInterface(stopbadexecutor, soundId, BadExecutors)
   
   local G2L = {};
   
@@ -243,6 +242,22 @@ function GuiModule.RunInterface(stopbadexecutor)
   	
   	task.wait(0.5)
     
+    local function shake(frame, duration, strength)
+  	  local originalPosition = frame.Position
+  
+  	  local startTime = tick()
+  
+  	  while tick() - startTime < duration do
+  		  local offsetX = math.random(-strength, strength)
+  		  local offsetY = math.random(-strength, strength)
+  
+  		  frame.Position = originalPosition + UDim2.new(0, offsetX, 0, offsetY)
+  		  wait(0.02)
+  	  end
+  
+  	  frame.Position = originalPosition
+    end
+    
     function GuiModule.setValueBar(valueTable, valueSize)
       
       if not valueTable or type(valueTable) ~= "table" then return end
@@ -270,8 +285,11 @@ function GuiModule.RunInterface(stopbadexecutor)
       
       if stopbadexecutor then
         GuiModule.setValueBar({Text = nameExecutor, Color = Color3.fromRGB(248, 0, 0)}, 0.5)
-        notification:createNotification(messageWarning, 10)
+        task.spawn(function() shake(background, 0.5, 5) end)
+        notification:createNotification(messageWarning, 5)
         warn("[Rael Hub]" .. messageWarning)
+        task.wait(5)
+        G2L["1"]:Destroy()
         return false
       end
       

@@ -1,7 +1,13 @@
-local GuiModule = loadstring(game:HttpGet("https://raw.githubusercontent.com/raelhubfunctions/rael-hub-gui/refs/heads/main/Source.lua"))()
+local GuiModule = loadstring(game:HttpGet("https://raw.githubusercontent.com/raelhubfunctions/rael-hub-gui/refs/heads/main/Module.lua"))()
 
-GuiModule.RunInterface(false)
-GuiModule.setValueBar({
-  Text = "Tralalelo Tralala"
-}
-, 0.7)
+local Support = GuiModule.RunInterface(true, "sound", {
+  "xeno",
+  "krnl"
+})
+
+if Support ~= "nosupport" then
+  GuiModule.setValueBar({
+    Text = "Tralalelo Tralala"
+  }
+  , 0.7)
+end
