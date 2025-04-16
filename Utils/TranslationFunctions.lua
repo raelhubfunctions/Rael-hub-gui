@@ -43,12 +43,4 @@ function Module.startVerification()
 	end
 end
 
-function Module.ReturnLoadedTranslations(TableTranslation)
-	local TableValues = {}
-	for _, Table in pairs(TableTranslation) do
-		table.insert(TableValues, Table)
-	end
-	return table.unpack(TableValues)
-end
-
 return Module
