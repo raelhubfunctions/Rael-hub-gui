@@ -5,13 +5,13 @@ local Identifier = "raelhub"
 local UserKey = ""
 local PlayerService = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
-local UserID = gethwid()
+local UserID = game:GetService("RbxAnalyticsService"):GetClientId()
 
 local RaelHubTradutor = loadstring(game:HttpGet("https://raw.githubusercontent.com/raelhubfunctions/Rael-Hub-functions/refs/heads/main/Rael%20Translation%20API/script.lua"))()
 local NotificationManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/raelhubfunctions/Rael-Hub-functions/refs/heads/main/Rael%20notification%20system/script.lua"))()
 local notification = NotificationManager.new()
 
--- Função para validar a chave
+-- FunÃ§Ã£o para validar a chave
 function ValidateKey()
     local Url = "https://pandadevelopment.net/v2_validation?key=" .. UserKey .. "&service=" .. Identifier .. "&hwid=" .. UserID
     local DataFetch = request({
@@ -29,12 +29,12 @@ function ValidateKey()
             return false
         end
     else
-        error("[Pelinda] Falha na requisição")
+        error("[Pelinda] Falha na requisiÃ§Ã£o")
         return false
     end
 end
 
--- Função para gerar o link de pegar a key
+-- FunÃ§Ã£o para gerar o link de pegar a key
 function GetKey()
     return "https://pandadevelopment.net/getkey?service=" .. Identifier .. "&hwid=" .. UserID
 end
